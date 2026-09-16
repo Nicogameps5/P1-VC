@@ -24,7 +24,15 @@ En este ejercicio se usan las funciones de la librería OpenCV para crear una co
 A las funciones se le pasan la imagen, las coordenadas de comienzo y final del dibujo, el color (en formato RGB) y el grosor. En el caso de los rectángulos, se le pasa un grosor de `-1` para que la figura se rellene de color sólido, mientras que a las líneas negras se les aplica un grosor de `8`. De esta manera, se van formando las figuras con unas pocas llamadas a las funciones.
 
 
-### Tarea 4: Diseño PopArt
+
+## Tarea 3: Pintar pixel mas claro y mas oscuro
+Para esta tarea, se utilizó asistencia de IA para consultar las funciones nativas de OpenCV más eficientes para este fin, utilizando `cv2.cvtColor` para convertir el fotograma a escala de grises y `cv2.minMaxLoc` para extraer directamente los valores y coordenadas (x,y) del pixel más claro y más oscuro, los cuales se representan gráficamente sobre la imagen original mediante `cv2.circle` y `cv2.putText`. 
+
+Al ejecutar la búsqueda de manera continua fotograma a fotograma, los círculos iban a saltos. Para mitigar este problema y acelerar la ejecución, se implementó un contador `(contador % 5 == 0)` para ejecutar la búsqueda únicamente cada cinco fotogramas mientras se siguen dibujando las últimas coordenadas obtenidas en los cuadros intermedios. Aunque esta técnica mejoró el rendimiento general la imagen sigue experimentando ciertos saltos derivados del retardo visible al actualizar las posiciones en bloques y de las limitaciones propias de tasa de refresco de la cámara.
+
+
+
+## Tarea 4: Diseño PopArt
 
 Se realizarán cambios en una misma imagen para desarrollar una propuesta de PopArt. Para ello, primero de cogen las dimensiones de la cámara y las reducimos a la mitad para calcular el espacio del collage. La imagen resultante para cada cuadrante será de 1/4 de la original, correspondiendo así a una esquina de la composición final:
 
