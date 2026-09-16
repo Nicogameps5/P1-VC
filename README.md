@@ -21,3 +21,7 @@ A las funciones se le pasan la imagen, las coordenadas de comienzo y final del d
 
 
 
+## Tarea 3: Pintar pixel mas claro y mas oscuro
+Para esta tarea, se utilizó asistencia de IA para consultar las funciones nativas de OpenCV más eficientes para este fin, utilizando `cv2.cvtColor` para convertir el fotograma a escala de grises y `cv2.minMaxLoc` para extraer directamente los valores y coordenadas (x,y) del pixel más claro y más oscuro, los cuales se representan gráficamente sobre la imagen original mediante `cv2.circle` y `cv2.putText`. 
+
+Al ejecutar la búsqueda de manera continua fotograma a fotograma, los círculos iban a saltos. Para mitigar este problema y acelerar la ejecución, se implementó un contador `(contador % 5 == 0)` para ejecutar la búsqueda únicamente cada cinco fotogramas mientras se siguen dibujando las últimas coordenadas obtenidas en los cuadros intermedios. Aunque esta técnica mejoró el rendimiento general la imagen sigue experimentando ciertos saltos derivados del retardo visible al actualizar las posiciones en bloques y de las limitaciones propias de tasa de refresco de la cámara.
