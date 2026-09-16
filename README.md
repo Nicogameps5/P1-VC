@@ -1,5 +1,9 @@
 # Practica 1 VC
 
+Ejercicios de la primera semana de laboratorio de VC.
+
+Nicolás Hernández Castro - Gabriel Godoy Navarro - EII ULPGC 16 de septiembre de 2026
+
 ## Tarea 1: Tablero de Ajedrez
 ### Forma manual:
 Para generar el tablero de ajedrez se inicializa la matriz de 800×800 píxeles con un único canal en negro mediante `np.zeros()`. A continuación, se emplean dos bucles for anidados para iterar en saltos de 100 píxeles a lo largo de las filas y columnas para rellenar los cuadrados que corresponderian a las casillas blancas dentro del bucle. La condición `(i // tamaño + j // tamaño) % 2 == 0` evalúa la paridad de la coordenada de cada casilla para determinar que corresponda con una casilla blanca y pintar de blanco (255) las regiones correspondientes. Finalmente, la imagen resultante se renderiza en pantalla en escala de grises utilizando `plt.imshow` y se despliega con `plt.show()`.
