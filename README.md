@@ -35,7 +35,7 @@ Al ejecutar la búsqueda de manera continua fotograma a fotograma, los círculos
 
 ## Tarea 4: Diseño PopArt
 
-Se realizarán cambios en una misma imagen para desarrollar una propuesta de PopArt. Para ello, primero de cogen las dimensiones de la cámara y las reducimos a la mitad para calcular el espacio del collage. La imagen resultante para cada cuadrante será de 1/4 de la original, correspondiendo así a una esquina de la composición final:
+Se realizarán cambios en una misma imagen para desarrollar una propuesta de PopArt. Para ello, primero se cogen las dimensiones de la cámara y las reducimos a la mitad para calcular el espacio del collage. La imagen resultante para cada cuadrante será de 1/4 de la original, correspondiendo así a una esquina de la composición final:
 
 ```python
 w = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH) / 2)
