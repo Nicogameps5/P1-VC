@@ -20,4 +20,34 @@ En este ejercicio se usan las funciones de la librería OpenCV para crear una co
 A las funciones se le pasan la imagen, las coordenadas de comienzo y final del dibujo, el color (en formato RGB) y el grosor. En el caso de los rectángulos, se le pasa un grosor de `-1` para que la figura se rellene de color sólido, mientras que a las líneas negras se les aplica un grosor de `8`. De esta manera, se van formando las figuras con unas pocas llamadas a las funciones.
 
 
+### Tarea 4: Diseño PopArt
 
+Se realizarán cambios en una misma imagen para desarrollar una propuesta de PopArt. Para ello, primero de cogen las dimensiones de la cámara y las reducimos a la mitad para calcular el espacio del collage. La imagen resultante para cada cuadrante será de 1/4 de la original, correspondiendo así a una esquina de la composición final:
+
+```python
+w = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH) / 2)
+h = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT) / 2)
+vid.set(cv2.CAP_PROP_FRAME_WIDTH, w)
+vid.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
+```
+
+Posteriormente, se crea el collage vacío con un lienzo negro, multiplicando por 2 las dimensiones reducidas anteriormente. Para facilitar la manipulación, se divide el lienzo y se asigna cada bloque del collage de manera simétrica jugando con las dimensiones de las esquinas (tl, tr, bl, br):
+
+```python
+collage = np.zeros((h*2, w*2, 3), dtype=np.uint8)
+tl = collage[0:h, 0:w]
+tr = collage[0:h, w:w+w]
+bl = collage[h:h+h, 0:w]
+br = collage[h:h+h, w:w+w]
+```
+Para el resto del ejercicio solo queda asignar los estilos de PopArt a cada una de las cuatro divisiones del collage durante el bucle de captura. Para generar variedad, se transforma el fotograma a escala de grises y utilizando funciones de la librería OpenCV y con matrices de Numpy:
+
+**Arriba Izquierda (Warhol Suave)**: Se aplica un mapa de color automático usando la función `cv2.applyColorMap()` con el parámetro COLORMAP_SPRING.
+
+**Arriba Derecha (Psicodélico)**: Se convierte la imagen al espacio de color HSV con `cv2.cvtColor()`, se separan sus canales (``cv2.split()``) y se aplican operaciones matemáticas para rotar el tono y saturar los colores antes de volver a unirlos.
+
+**Abajo Izquierda (Duotono Pop)**: Se binariza la imagen usando ``cv2.threshold()`` para separar las sombras de las luces, y se colorea el resultado utilizando máscaras booleanas.
+
+**Abajo Derecha (Neón)**: Se detectan los bordes de la silueta mediante ``cv2.Canny()`` y se superponen tintados de verde brillante usando la función ``cv2.addWeighted()``
+
+**USO DE IA**: Le hemos preguntado ideas para hacer el PopArt a Gemini para obtener variedad de estilos tales como: **Warhol Suave**, **Psicodélico**, **Duotono Pop** y **Neón**. Nos ha respondido con las funciones de la librería OpenCV que desconocíamos y propuso para ayudarnos y hemos aplicado.
